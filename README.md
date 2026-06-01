@@ -1,73 +1,86 @@
-# React + TypeScript + Vite
+# Image Search Gallery
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React application that searches the [Unsplash](https://unsplash.com/developers) photo library and displays results in a responsive gallery with infinite "load more" pagination and a full-size image modal.
 
-Currently, two official plugins are available:
+This is homework module 4 of the GoIT Neo React course.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- 🔍 Search photos by keyword via the Unsplash REST API
+- 🖼️ Responsive image gallery built from reusable components
+- ➕ "Load more" pagination with smooth scroll to newly loaded images
+- 🔎 Click an image to view a larger version with details in a modal
+- ⏳ Loading spinner while requests are in flight
+- ⚠️ Inline error handling for failed requests
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vite.dev/) for dev server and build
+- [Axios](https://axios-http.com/) for HTTP requests
+- [react-modal](https://github.com/reactjs/react-modal) for the image modal
+- [react-spinners](https://www.davidhu.io/react-spinners/) for the loading indicator
+- [react-hot-toast](https://react-hot-toast.com/) for notifications
+- [react-icons](https://react-icons.github.io/react-icons/) for icons
+- CSS Modules for component styling
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Prerequisites
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Node.js 18+ and npm
+- An Unsplash API access key ([create one here](https://unsplash.com/oauth/applications))
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Installation
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Environment Variables
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Copy `.env.example` to `.env` and fill in your Unsplash access key:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cp .env.example .env
+```
+
+```env
+VITE_API_URL=https://api.unsplash.com
+VITE_UNSPLASH_API_KEY=your_unsplash_access_key
+```
+
+### Run the dev server
+
+```bash
+npm run dev
+```
+
+The app will be available at the URL printed in the terminal (default `http://localhost:5173`).
+
+## Available Scripts
+
+| Script            | Description                              |
+| ----------------- | ---------------------------------------- |
+| `npm run dev`     | Start the Vite development server        |
+| `npm run build`   | Type-check and build for production      |
+| `npm run preview` | Preview the production build locally     |
+| `npm run lint`    | Run ESLint across the project            |
+
+## Project Structure
+
+```
+src/
+├── api/
+│   └── unsplash.ts          # Axios client and searchImages request
+├── components/
+│   ├── SearchBar/           # Search form
+│   ├── ImageGallery/        # Grid of image cards
+│   ├── ImageCard/           # Single gallery item
+│   ├── ImageModal/          # Full-size image modal
+│   └── LoadMoreBtn/         # Pagination button
+├── types/
+│   └── image.ts             # Unsplash API type definitions
+├── App.tsx                  # App state and data flow
+└── main.tsx                 # Entry point
 ```
