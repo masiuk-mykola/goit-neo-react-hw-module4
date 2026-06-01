@@ -1,0 +1,31 @@
+#root {
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+header {
+  background-color: #3e51b4;
+  padding: 4px;
+  width: 100%;
+}
+
+.error {
+  margin: 32px 0;
+  color: red;
+  font-size: 23px;
+}
+
+.container {
+  padding-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wrapper {
+  max-width: 1440px;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
